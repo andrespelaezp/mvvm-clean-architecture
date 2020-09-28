@@ -2,7 +2,7 @@ package com.example.myapplication.data.entities
 
 data class PostsResult(
     val kind: String,
-    val data: List<PostsData>
+    val data: PostsData
 )
 
 data class PostsData(
@@ -10,5 +10,5 @@ data class PostsData(
 )
 
 data class Children(
-    val posts: List<Post>
+    val data: Post
 )

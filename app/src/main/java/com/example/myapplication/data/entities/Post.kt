@@ -7,4 +7,7 @@ data class Post(
     val score: Int,
     val id :String,
     val author: String
-)
+) {
+
+    fun commentsText(): String = "$numComments comments"
+}
