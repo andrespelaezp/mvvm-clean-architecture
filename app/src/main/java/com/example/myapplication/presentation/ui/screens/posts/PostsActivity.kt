@@ -8,10 +8,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityPostsBinding
 import com.example.myapplication.di.ViewModelProviderFactory
+import com.example.myapplication.presentation.base.BaseActivity
 import com.example.myapplication.presentation.ui.adapters.PostAdapter
 import javax.inject.Inject
 
-class PostsActivity : AppCompatActivity() {
+class PostsActivity : BaseActivity() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
@@ -23,7 +24,7 @@ class PostsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         viewModel = ViewModelProvider(this, factory).get(PostsViewModel::class.java)
-        val binding: ActivityPostsBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val binding: ActivityPostsBinding = DataBindingUtil.setContentView(this, R.layout.activity_posts)
 
         postsAdapter = PostAdapter()
         binding.postsList.adapter = postsAdapter

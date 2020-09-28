@@ -5,8 +5,9 @@ import com.example.myapplication.di.ApplicationModule
 import com.example.myapplication.di.DaggerApplicationComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
+import dagger.android.HasActivityInjector
 
-class RedditApplication : DaggerApplication() {
+class RedditApplication : DaggerApplication(), HasActivityInjector {
 
     init {
         INSTANCE = this
