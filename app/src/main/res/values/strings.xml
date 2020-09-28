@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Reddit Application</string>
+
+    <string name="base_url">https://www.reddit.com/r/</string>
 </resources>
