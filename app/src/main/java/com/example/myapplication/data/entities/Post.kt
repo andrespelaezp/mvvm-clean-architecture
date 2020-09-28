@@ -9,7 +9,8 @@ data class Post(
     val thumbnail: String,
     val score: Int,
     val id :String,
-    val author: String
+    val author: String,
+    var read: Boolean? = false
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -18,9 +19,9 @@ data class Post(
         parcel.readString() ?: "",
         parcel.readInt(),
         parcel.readString() ?: "",
-        parcel.readString() ?: ""
-    ) {
-    }
+        parcel.readString() ?: "",
+        parcel.readBoolean()
+    )
 
     fun commentsText(): String = "$numComments comments"
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -30,6 +31,7 @@ data class Post(
         parcel.writeInt(score)
         parcel.writeString(id)
         parcel.writeString(author)
+        parcel.writeBoolean(read?: false)
     }
 
     override fun describeContents(): Int {

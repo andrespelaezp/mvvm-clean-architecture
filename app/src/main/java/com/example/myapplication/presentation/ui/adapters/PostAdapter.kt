@@ -11,7 +11,7 @@ import com.example.myapplication.data.entities.Post
 import com.example.myapplication.databinding.ListItemPostBinding
 
 class PostAdapter constructor(
-    val clickListener: (post: Post) -> Unit
+    private val clickListener: (post: Post) -> Unit
 ): ListAdapter<Children, RecyclerView.ViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -40,6 +40,7 @@ class PostAdapter constructor(
             post: Children,
             view: View
         ) {
+            post.data.read = true
             clickListener(post.data)
         }
 

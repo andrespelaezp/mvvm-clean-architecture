@@ -15,8 +15,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/list_item_padding"
-        android:onClick="@{clickListener}">
+        android:onClick="@{clickListener}"
+        android:padding="@dimen/list_item_padding">
+
+        <View
+            android:id="@+id/read"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/drawable_read"
+            app:layout_constraintBottom_toTopOf="@+id/imgThumbnail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:isGone="@{post.data.read}"/>
 
         <ImageView
             android:id="@+id/imgThumbnail"
@@ -29,13 +39,14 @@
 
         <TextView
             android:id="@+id/txtAuthor"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:text="@{post.data.author}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/read"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@string/author_placeholder" />
 
