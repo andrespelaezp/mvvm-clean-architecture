@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Reddit Application</string>
-
     <string name="base_url">https://www.reddit.com/r/</string>
+
+    <string name="splash_screen">Splash Screen</string>
+    <string name="title_placeholder">Placeholder Title</string>
+    <string name="comments_placeholder">#### comments</string>
+    <string name="author_placeholder">author</string>
+
 </resources>
