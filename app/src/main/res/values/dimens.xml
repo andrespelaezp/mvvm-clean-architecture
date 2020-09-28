@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="thumbnail_size">100dp</dimen>
+    <dimen name="post_image_size">120dp</dimen>
     <dimen name="list_item_padding">16dp</dimen>
 
 </resources>

@@ -1,27 +1,36 @@
 package com.example.myapplication.presentation.ui
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.myapplication.R
-import com.example.myapplication.presentation.ui.screens.posts.PostsActivity
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
+import com.example.myapplication.data.entities.Post
+import com.example.myapplication.presentation.base.BaseActivity
+import com.example.myapplication.presentation.ui.screens.postDetail.PostDetailFragment
+import com.example.myapplication.presentation.ui.screens.posts.PostsFragment
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + Job()
+class MainActivity : BaseActivity(), PostHandler {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        launch {
-            delay(1000)
-            withContext(Dispatchers.Main){
-                startActivity(Intent(applicationContext, PostsActivity::class.java))
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction().apply {
+                add(R.id.container, PostsFragment.newInstance()).commit()
             }
         }
     }
+
+    override fun navigateToPost(post: Post) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.container, PostDetailFragment.newInstance(post)).addToBackStack(null).commit()
+        }
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount >= 1)
+            supportFragmentManager.popBackStack()
+        else
+            super.onBackPressed()
+    }
+
 }
