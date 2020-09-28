@@ -16,6 +16,8 @@ class PostsViewModel @Inject constructor(
     }
 
     fun getPosts() {
+        viewState.value?.copy(loading = true)
+
         addDisposable(postsUseCase.observable()
             .subscribe({ posts ->
                 viewState.value?.let {
