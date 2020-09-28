@@ -51,6 +51,9 @@ class PostsFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
         binding.postsList.adapter = postsAdapter
         binding.swipeContainer.setOnRefreshListener(this)
+        binding.txtDismiss.setOnClickListener {
+            dismissPosts()
+        }
 
         observeViewState(binding)
 
@@ -94,6 +97,11 @@ class PostsFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
             postsAdapter.submitList(copyList)
             postsAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun dismissPosts() {
+        viewModel.viewState.value?.posts?.children?.clear()
+        postsAdapter.notifyDataSetChanged()
     }
 
     companion object {

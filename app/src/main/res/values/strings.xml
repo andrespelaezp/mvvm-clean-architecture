@@ -7,5 +7,6 @@
     <string name="comments_placeholder">#### comments</string>
     <string name="author_placeholder">author</string>
     <string name="dismissPost">Dismiss Post</string>
+    <string name="dismissText">Dismiss</string>
 
 </resources>
