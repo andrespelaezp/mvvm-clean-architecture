@@ -1,13 +1,13 @@
 package com.example.myapplication.di
 
-import com.example.myapplication.presentation.ui.screens.posts.PostsActivity
+import com.example.myapplication.presentation.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityModule {
 
-    @ContributesAndroidInjector
-    internal abstract fun bindPostsActivity(): PostsActivity
+    @ContributesAndroidInjector(modules = [FragmentModule::class])
+    internal abstract fun bindMainActivity(): MainActivity
 
 }

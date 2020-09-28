@@ -1,18 +1,19 @@
 package com.example.myapplication.presentation.ui.screens.posts
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityPostsBinding
+import com.example.myapplication.databinding.FragmentPostsBinding
 import com.example.myapplication.di.ViewModelProviderFactory
-import com.example.myapplication.presentation.base.BaseActivity
+import com.example.myapplication.presentation.base.BaseFragment
+import com.example.myapplication.presentation.ui.PostHandler
 import com.example.myapplication.presentation.ui.adapters.PostAdapter
 import javax.inject.Inject
 
-class PostsActivity : BaseActivity() {
+class PostsFragment: BaseFragment() {
 
     @Inject
     lateinit var factory: ViewModelProviderFactory
@@ -20,22 +21,33 @@ class PostsActivity : BaseActivity() {
     lateinit var viewModel: PostsViewModel
     lateinit var postsAdapter: PostAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = FragmentPostsBinding.inflate(inflater, container, false)
 
         viewModel = ViewModelProvider(this, factory).get(PostsViewModel::class.java)
-        val binding: ActivityPostsBinding = DataBindingUtil.setContentView(this, R.layout.activity_posts)
 
-        postsAdapter = PostAdapter()
+        postsAdapter = PostAdapter {post ->
+            activity?.let {
+                if (it is PostHandler)
+                    it.navigateToPost(post)
+            }
+        }
+
         binding.postsList.adapter = postsAdapter
 
         if (savedInstanceState == null)
             viewModel.getPosts()
         observeViewState()
+
+        return binding.root
     }
 
     private fun observeViewState() {
-        viewModel.viewState.observe(this, Observer {viewState ->
+        viewModel.viewState.observe(viewLifecycleOwner, Observer {viewState ->
             handleViewState(viewState)
         })
     }
@@ -45,5 +57,9 @@ class PostsActivity : BaseActivity() {
             return
 
         postsAdapter.submitList(state.posts?.children)
+    }
+
+    companion object {
+        fun newInstance(): PostsFragment = PostsFragment()
     }
 }

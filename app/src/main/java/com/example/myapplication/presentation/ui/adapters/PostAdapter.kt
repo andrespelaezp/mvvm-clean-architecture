@@ -7,13 +7,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.data.entities.Children
+import com.example.myapplication.data.entities.Post
 import com.example.myapplication.databinding.ListItemPostBinding
 
-class PostAdapter: ListAdapter<Children, RecyclerView.ViewHolder>(PostDiffCallback()) {
+class PostAdapter constructor(
+    val clickListener: (post: Post) -> Unit
+): ListAdapter<Children, RecyclerView.ViewHolder>(PostDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return CropViewHolder(ListItemPostBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
+            LayoutInflater.from(parent.context), parent, false), clickListener)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -22,7 +25,8 @@ class PostAdapter: ListAdapter<Children, RecyclerView.ViewHolder>(PostDiffCallba
     }
 
     class CropViewHolder(
-        private val binding: ListItemPostBinding
+        private val binding: ListItemPostBinding,
+        val clickListener: (post: Post) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.setClickListener {
@@ -36,7 +40,7 @@ class PostAdapter: ListAdapter<Children, RecyclerView.ViewHolder>(PostDiffCallba
             post: Children,
             view: View
         ) {
-            //TODO: Navigate to plant
+            clickListener(post.data)
         }
 
         fun bind(item: Children) {
