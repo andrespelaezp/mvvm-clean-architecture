@@ -29,12 +29,9 @@ class PostsActivity : BaseActivity() {
         postsAdapter = PostAdapter()
         binding.postsList.adapter = postsAdapter
 
-        if (savedInstanceState == null) {
-            observeViewState()
+        if (savedInstanceState == null)
             viewModel.getPosts()
-        } else {
-            viewModel.getPosts()
-        }
+        observeViewState()
     }
 
     private fun observeViewState() {
