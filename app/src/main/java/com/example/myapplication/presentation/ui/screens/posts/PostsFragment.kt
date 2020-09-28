@@ -21,14 +21,22 @@ class PostsFragment: BaseFragment() {
     lateinit var viewModel: PostsViewModel
     lateinit var postsAdapter: PostAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+
+        viewModel = ViewModelProvider(this, factory).get(PostsViewModel::class.java)
+
+        if (savedInstanceState == null)
+            viewModel.getPosts()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentPostsBinding.inflate(inflater, container, false)
-
-        viewModel = ViewModelProvider(this, factory).get(PostsViewModel::class.java)
 
         postsAdapter = PostAdapter {post ->
             activity?.let {
@@ -39,8 +47,6 @@ class PostsFragment: BaseFragment() {
 
         binding.postsList.adapter = postsAdapter
 
-        if (savedInstanceState == null)
-            viewModel.getPosts()
         observeViewState()
 
         return binding.root
