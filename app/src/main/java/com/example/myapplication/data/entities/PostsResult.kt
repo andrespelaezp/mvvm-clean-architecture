@@ -6,7 +6,7 @@ data class PostsResult(
 )
 
 data class PostsData(
-    val children: List<Children>
+    val children: MutableList<Children>
 )
 
 data class Children(
