@@ -95,7 +95,7 @@ class PostsFragment: BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
             }
             copyList.removeAt(itemIndex)
             postsAdapter.submitList(copyList)
-            postsAdapter.notifyDataSetChanged()
+            postsAdapter.notifyItemRemoved(itemIndex)
         }
     }
 
