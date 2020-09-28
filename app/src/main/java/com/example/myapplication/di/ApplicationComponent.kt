@@ -10,6 +10,7 @@ import javax.inject.Singleton
 @Component(modules = [
     ApiModule::class,
     ApplicationModule::class,
+    RepositoryModule::class,
     AndroidInjectionModule::class
 ])
 interface ApplicationComponent: AndroidInjector<RedditApplication> {
