@@ -8,6 +8,9 @@
             name="clickListener"
             type="android.view.View.OnClickListener"/>
         <variable
+            name="clickDismiss"
+            type="android.view.View.OnClickListener"/>
+        <variable
             name="post"
             type="com.example.myapplication.data.entities.Children"/>
     </data>
@@ -67,13 +70,36 @@
             android:id="@+id/txtComments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="51dp"
             android:text="@{post.data.commentsText}"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitle"
             tools:text="@string/comments_placeholder" />
+
+        <LinearLayout
+            android:id="@+id/dismissPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:orientation="horizontal"
+            android:onClick="@{clickDismiss}"
+            app:layout_constraintTop_toBottomOf="@+id/imgThumbnail"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dismissPost"
+                android:layout_gravity="center_vertical"
+                />
+
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
